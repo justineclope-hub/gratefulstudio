@@ -823,6 +823,19 @@
       return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
     }
 
+    // Fisher-Yates shuffle, in place. Used so photos from the same family
+    // (shot back-to-back, same backdrop) don't end up clustered together
+    // in the grid -- every page load gets a fresh random order.
+    function shuffle(arr) {
+      for (var i = arr.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+      }
+      return arr;
+    }
+
     function fallbackHTML() {
       return '<p class="body-text" style="grid-column:1/-1;">Photos are taking a moment to load. '
         + '<a href="https://instagram.com/hello.gratefulstudio" target="_blank" rel="noopener noreferrer">See them on Instagram</a> in the meantime.</p>';
@@ -841,6 +854,11 @@
         el.innerHTML = comingSoonHTML();
         return;
       }
+
+      // Randomize display order on every page load so the same family's
+      // photos (often uploaded back-to-back, same backdrop) are scattered
+      // across the grid instead of appearing next to each other.
+      shuffle(matches);
 
       el.innerHTML = matches.map(function (f) {
         return '<a href="' + f.download_url + '" target="_blank" rel="noopener noreferrer">'
