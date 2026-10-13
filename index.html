@@ -271,6 +271,30 @@
     background:var(--pine);
   }
 
+  /* ---------- mobile section dropdown (replaces the pill row below 680px) ---------- */
+  .mobile-tab-select{
+    display:none;
+    pointer-events:auto;
+    width:100%; max-width:360px;
+    font-family:'Work Sans', sans-serif;
+    font-size:14px; font-weight:600;
+    color:var(--ink);
+    background:var(--ivory);
+    border:1px solid rgba(0,0,0,0.1);
+    border-radius:999px;
+    padding:12px 38px 12px 18px;
+    box-shadow:0 10px 26px -6px rgba(42,35,24,0.22), 0 0 0 1px rgba(249,222,163,0.25);
+    appearance:none; -webkit-appearance:none; -moz-appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%232A2318' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 7.5 10 12.5 15 7.5'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 14px center;
+    background-size:16px;
+  }
+  @media (max-width:679px){
+    .top-nav-inner{ display:none; }
+    .mobile-tab-select{ display:block; }
+  }
+
   /* ---------- proof teaser (links to Our Work) ---------- */
   .proof-teaser{
     display:inline-flex; align-items:center; gap:9px;
@@ -355,12 +379,24 @@
 <nav class="top-nav" aria-label="Site sections">
   <div class="top-nav-inner">
     <button class="tab-btn active" data-tab="marathon" type="button">Christmas Family Photo Marathon</button>
-    <button class="tab-btn" data-tab="our-work" type="button">Our Work</button>
+    <button class="tab-btn" data-tab="our-work" type="button">Gallery</button>
     <button class="tab-btn" data-tab="family-shoots" type="button">Family Shoots</button>
     <button class="tab-btn" data-tab="birthdays" type="button">Birthdays</button>
     <button class="tab-btn" data-tab="baptism" type="button">Baptism</button>
     <button class="tab-btn" data-tab="mothers-day" type="button">Mother's Day Mini Shoots</button>
   </div>
+
+  <!-- Mobile-only dropdown. Shown instead of the pill row below a breakpoint
+       (see .mobile-tab-select in CSS) since a horizontally-scrolling row of
+       six tab pills is cramped and easy to mis-tap on small screens. -->
+  <select class="mobile-tab-select" aria-label="Site sections">
+    <option value="marathon">Christmas Family Photo Marathon</option>
+    <option value="our-work">Gallery</option>
+    <option value="family-shoots">Family Shoots</option>
+    <option value="birthdays">Birthdays</option>
+    <option value="baptism">Baptism</option>
+    <option value="mothers-day">Mother's Day Mini Shoots</option>
+  </select>
 </nav>
 
 <!-- ================= TAB: CHRISTMAS FAMILY PHOTO MARATHON ================= -->
@@ -713,6 +749,7 @@
   (function () {
     var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab-btn'));
     var panels = Array.prototype.slice.call(document.querySelectorAll('.tab-panel'));
+    var mobileSelect = document.querySelector('.mobile-tab-select');
     var DEFAULT_TAB = 'marathon';
     var KNOWN_TABS = tabs.map(function (t) { return t.getAttribute('data-tab'); });
 
@@ -725,6 +762,9 @@
       panels.forEach(function (p) {
         p.style.display = (p.getAttribute('data-tab') === tabName) ? 'block' : 'none';
       });
+      if (mobileSelect && mobileSelect.value !== tabName) {
+        mobileSelect.value = tabName;
+      }
       if (!opts.skipScrollTop) {
         window.scrollTo({ top: 0, behavior: 'auto' });
       }
@@ -736,6 +776,15 @@
         history.replaceState(null, '', '#' + btn.getAttribute('data-tab'));
       });
     });
+
+    // Mobile dropdown mirrors the pill tabs: picking an option switches the
+    // section the same way tapping a pill would.
+    if (mobileSelect) {
+      mobileSelect.addEventListener('change', function () {
+        showTab(mobileSelect.value);
+        history.replaceState(null, '', '#' + mobileSelect.value);
+      });
+    }
 
     // In-content links that jump straight to another tab (e.g. the "See our
     // past work" link inside the Marathon tab, pointing at Our Work) behave
