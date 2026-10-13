@@ -272,27 +272,44 @@
   }
 
   /* ---------- mobile section dropdown (replaces the pill row below 680px) ---------- */
-  .mobile-tab-select{
+  .mobile-tab-wrap{
     display:none;
     pointer-events:auto;
+    flex-direction:column; align-items:center; gap:7px;
     width:100%; max-width:360px;
+  }
+  .mobile-tab-label{
+    display:inline-block;
+    font-family:'Work Sans', sans-serif;
+    font-size:10.5px; font-weight:700;
+    letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--bark);
+    background:var(--ivory);
+    border-radius:999px;
+    padding:4px 14px;
+    box-shadow:0 4px 12px -3px rgba(42,35,24,0.18);
+  }
+  .mobile-tab-select{
+    width:100%;
     font-family:'Work Sans', sans-serif;
     font-size:14px; font-weight:600;
     color:var(--ink);
-    background:var(--ivory);
+    background-color:var(--ivory);
     border:1px solid rgba(0,0,0,0.1);
     border-radius:999px;
-    padding:12px 38px 12px 18px;
+    padding:12px 38px 12px 44px;
     box-shadow:0 10px 26px -6px rgba(42,35,24,0.22), 0 0 0 1px rgba(249,222,163,0.25);
     appearance:none; -webkit-appearance:none; -moz-appearance:none;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%232A2318' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 7.5 10 12.5 15 7.5'/%3E%3C/svg%3E");
-    background-repeat:no-repeat;
-    background-position:right 14px center;
-    background-size:16px;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%232A2318' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 7.5 10 12.5 15 7.5'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%232A2318' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 6h14M3 10h14M3 14h14'/%3E%3C/svg%3E");
+    background-repeat:no-repeat, no-repeat;
+    background-position:right 14px center, left 16px center;
+    background-size:16px, 17px;
   }
   @media (max-width:679px){
     .top-nav-inner{ display:none; }
-    .mobile-tab-select{ display:block; }
+    .mobile-tab-wrap{ display:flex; }
   }
 
   /* ---------- proof teaser (links to Our Work) ---------- */
@@ -378,7 +395,7 @@
 <!-- ================= TOP NAV ================= -->
 <nav class="top-nav" aria-label="Site sections">
   <div class="top-nav-inner">
-    <button class="tab-btn active" data-tab="marathon" type="button">Christmas Family Photo Marathon</button>
+    <button class="tab-btn active" data-tab="marathon" type="button">Year III Marathon</button>
     <button class="tab-btn" data-tab="our-work" type="button">Gallery</button>
     <button class="tab-btn" data-tab="family-shoots" type="button">Family Shoots</button>
     <button class="tab-btn" data-tab="birthdays" type="button">Birthdays</button>
@@ -387,16 +404,21 @@
   </div>
 
   <!-- Mobile-only dropdown. Shown instead of the pill row below a breakpoint
-       (see .mobile-tab-select in CSS) since a horizontally-scrolling row of
-       six tab pills is cramped and easy to mis-tap on small screens. -->
-  <select class="mobile-tab-select" aria-label="Site sections">
-    <option value="marathon">Christmas Family Photo Marathon</option>
+       (see .mobile-tab-wrap in CSS) since a horizontally-scrolling row of
+       six tab pills is cramped and easy to mis-tap on small screens. A small
+       label plus a menu icon inside the control make it obvious it's a
+       dropdown, not just a button. -->
+  <div class="mobile-tab-wrap">
+    <span class="mobile-tab-label">Browse sections</span>
+    <select class="mobile-tab-select" aria-label="Site sections">
+    <option value="marathon">Year III Marathon</option>
     <option value="our-work">Gallery</option>
     <option value="family-shoots">Family Shoots</option>
     <option value="birthdays">Birthdays</option>
     <option value="baptism">Baptism</option>
     <option value="mothers-day">Mother's Day Mini Shoots</option>
-  </select>
+    </select>
+  </div>
 </nav>
 
 <!-- ================= TAB: CHRISTMAS FAMILY PHOTO MARATHON ================= -->
