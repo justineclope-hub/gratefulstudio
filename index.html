@@ -366,6 +366,16 @@
     color:var(--ink); opacity:0.7; font-style:italic;
   }
 
+  /* ---------- set strip (This Year's Set, extra photos) ---------- */
+  .set-strip{
+    display:flex; gap:12px; overflow-x:auto; -webkit-overflow-scrolling:touch;
+    scroll-snap-type:x mandatory; padding:4px 2px 16px; margin-top:20px;
+  }
+  .set-strip a{ flex:0 0 auto; scroll-snap-align:start; display:block; border-radius:10px; overflow:hidden; box-shadow:0 0 0 1px rgba(0,0,0,0.06); }
+  .set-strip img{ height:220px; width:auto; display:block; }
+  @media (min-width:680px){ .set-strip img{ height:260px; } }
+  .set-strip-note{ text-align:center; font-size:13px; color:var(--ink); opacity:0.65; margin:0 0 2px; }
+
   /* ---------- tab panels ---------- */
   .tab-panel{ display:none; }
   .tab-panel[data-tab="marathon"]{ display:block; }
@@ -457,6 +467,18 @@
     <a href="set2026-booktree.jpg" target="_blank" rel="noopener noreferrer"><img src="set2026-booktree.jpg" loading="lazy" alt="Close-up of the stacked-book Christmas tree accent on this year's set" style="aspect-ratio:2/3;"></a>
     <a href="set2026-family.jpg" target="_blank" rel="noopener noreferrer"><img src="set2026-family.jpg" loading="lazy" alt="A real family posing together on this year's Christmas set" style="aspect-ratio:2/3;"></a>
     <a href="set2026-window.jpg" target="_blank" rel="noopener noreferrer" style="grid-column:1/-1;"><img src="set2026-window.jpg" loading="lazy" alt="Detail of the lit ladder tree and window nook on this year's set" style="aspect-ratio:3/2;width:100%;height:auto;"></a>
+  </div>
+
+  <p class="set-strip-note">Swipe for more from this year's set &rarr;</p>
+  <div class="set-strip">
+    <a href="set2026-playful.jpg" target="_blank" rel="noopener noreferrer"><img src="set2026-playful.jpg" loading="lazy" alt="A family playing together on this year's Christmas set, dad lifting his son up"></a>
+    <a href="set2026-ladder-ornaments.jpg" target="_blank" rel="noopener noreferrer"><img src="set2026-ladder-ornaments.jpg" loading="lazy" alt="The glowing star topper on the ladder tree"></a>
+    <a href="set2026-lantern-candle.jpg" target="_blank" rel="noopener noreferrer"><img src="set2026-lantern-candle.jpg" loading="lazy" alt="Wooden lantern and candle detail among pine and pinecones on the set"></a>
+    <a href="set2026-tictactoe.jpg" target="_blank" rel="noopener noreferrer"><img src="set2026-tictactoe.jpg" loading="lazy" alt="A cozy seating nook on the set with a wooden tic-tac-toe game and candles"></a>
+    <a href="set2026-booktree-bokeh.jpg" target="_blank" rel="noopener noreferrer"><img src="set2026-booktree-bokeh.jpg" loading="lazy" alt="Close-up of the book tree with twinkling lights in the background"></a>
+    <a href="set2026-lantern-bokeh.jpg" target="_blank" rel="noopener noreferrer"><img src="set2026-lantern-bokeh.jpg" loading="lazy" alt="Candles and a glittered star ornament with soft bokeh lights in the background"></a>
+    <a href="set2026-gifts-macro.jpg" target="_blank" rel="noopener noreferrer"><img src="set2026-gifts-macro.jpg" loading="lazy" alt="Close-up of a wrapped gift with a burlap ribbon bow on the set"></a>
+    <a href="set2026-full-alt.jpg" target="_blank" rel="noopener noreferrer"><img src="set2026-full-alt.jpg" loading="lazy" alt="Another view of the full Year III set, with the ladder tree, seating area, and lamp"></a>
   </div>
 </section>
 
